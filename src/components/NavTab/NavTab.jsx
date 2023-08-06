@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function NavTab() {
   return (
     <div className='navtab'>
-      <Link to='//practicum.yandex.ru/' className='navtab__link'target='_blank'>
+      <Link to='/' className='navtab__link'>
         Узнать больше
       </Link>
     </div>
