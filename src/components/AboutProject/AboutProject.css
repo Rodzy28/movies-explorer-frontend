@@ -83,3 +83,82 @@
 .table-line__week_gray {
   background-color: #F2F2F2;
 }
+
+@media screen and (max-width: 900px) {
+  .about-project {
+    padding: 91px 50px 77px;
+  }
+
+  .table {
+    gap: 37px;
+  }
+
+  .table__text {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .table-line {
+    padding-top: 93px;
+  }
+
+  .table-line__cell {
+    min-width: 140px;
+  }
+
+  .table-line__cell:last-child {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project {
+    padding: 71px 18px 70px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+
+  .table {
+    padding-top: 61px;
+    flex-direction: column;
+    gap: 57px;
+  }
+
+  .table__cell {
+    gap: 17px;
+  }
+
+  .table__heading {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .table__text {
+    padding: 0;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .table-line {
+    padding-top: 60px;
+  }
+
+  .table-line__cell {
+    min-width: 100px;
+  }
+
+  .table-line__week {
+    font-size: 11px;
+    padding: 11px 0;
+  }
+
+  .table-line__text {
+    font-size: 11px;
+    margin-top: 7px;
+  }
+}

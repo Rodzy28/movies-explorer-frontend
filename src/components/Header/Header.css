@@ -16,6 +16,11 @@
 
 .header__logo {
   font-size: 0;
+  transition: opacity .3s;
+}
+
+.header__logo:hover {
+  opacity: .6;
 }
 
 .header__links {
@@ -30,6 +35,11 @@
 .header__link {
   color: #FFF;
   text-decoration: none;
+  transition: opacity .3s;
+}
+
+.header__link:hover {
+  opacity: .6;
 }
 
 .header__link:last-child {
@@ -42,7 +52,7 @@
   border-radius: 3px;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 900px) {
   .header__container {
     display: flex;
     justify-content: space-between;
@@ -51,7 +61,7 @@
   }
 }
 
-@media screen and (max-width: 425px)  {
+@media screen and (max-width: 425px) {
   .header__links {
     gap: 14px;
   }
@@ -68,7 +78,7 @@
 
 }
 
-@media screen and (max-width: 767px)  {
+@media screen and (max-width: 767px) {
   .header__container {
     width: calc(100vw - 28px)
   }

@@ -16,13 +16,14 @@
   align-items: center;
   line-height: 16px;
   box-sizing: border-box;
+  transition: opacity .3s;
 }
 
 .navtab__link:hover {
-  opacity: 0.6;
+  opacity: .6;
 }
 
-@media screen and (max-width: 1085px) {
+@media screen and (max-width: 900px) {
   .navtab {
     display: flex;
     justify-content: center;

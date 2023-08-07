@@ -38,6 +38,11 @@
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -1.2px;
+  transition: opacity .3s;
+}
+
+.portfolio__link:hover {
+  opacity: .4;
 }
 
 .portfolio__icon {
@@ -47,4 +52,38 @@
   background-repeat: no-repeat;
   width: 29px;
   height: 29px;
+}
+
+@media screen and (max-width: 900px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__icon {
+    margin: 0;
+    width: 22px;
+    height: 18px;
+  }
 }
