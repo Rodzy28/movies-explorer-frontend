@@ -90,7 +90,7 @@
 
 @media screen and (max-width: 767px) {
   .techs__table {
-    max-width: calc(84px + 84px + 10px);
+    max-width: calc(84px + 84px + 84px + 10px + 10px);
   }
 }
 
@@ -118,5 +118,9 @@
     font-size: 11px;
     line-height: 16px;
     letter-spacing: -0.44px;
+  }
+
+  .techs__table {
+    max-width: calc(84px + 84px + 10px);
   }
 }
