@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/header-logo.svg';
+import Navigation from '../Navigation/Navigation';
 
 export default function Header() {
   return (
@@ -9,10 +10,7 @@ export default function Header() {
         <Link to='/' className='header__logo'>
           <img src={logo} alt='Логотип' />
         </Link>
-        <div className='header__links'>
-          <Link to='/sign-up' className='header__link'>Регистрация</Link>
-          <Link to='/sign-in' className='header__link'>Войти</Link>
-        </div>
+        <Navigation />
       </div>
     </header>
   );
