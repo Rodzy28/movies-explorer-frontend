@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import { useLocation } from 'react-router-dom';
 import NotFound from '../NotFound/NotFound';
+import Register from '../Register/Register';
 
 export default function App() {
 
@@ -17,6 +18,7 @@ export default function App() {
       {routeWithHeader.includes(pathname) ? <Header /> : ''}
       <Routes>
         <Route path='/' element={<Main />} />
+        <Route path='/sign-up' element={<Register />} />
         <Route path='*' element={<NotFound/>} />
       </Routes>
       {routeWithHeader.includes(pathname) ? <Footer /> : ''}
