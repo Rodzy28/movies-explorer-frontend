@@ -75,6 +75,57 @@
     line-height: normal;
     margin-bottom: 5px;
 }
+
 .form__input-error:last-child {
     margin: 0;
+}
+
+
+.login__button {
+    text-align: center;
+    padding-top: 69px;
+}
+
+.login__button_padding {
+    padding-top: 137px;
+}
+
+.button_blue {
+    width: 396px;
+    height: 45px;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background-color: #3456F3;
+    color: #FFF;
+    transition: opacity .3s;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 16px;
+}
+
+.button_blue:hover {
+    opacity: .8;
+}
+
+.login__text {
+    color: #A0A0A0;
+    font-size: 14px;
+    line-height: normal;
+    margin-right: 6px;
+}
+
+.login__link {
+    color: #3456F3;
+    font-size: 14px;
+    line-height: normal;
+    transition: opacity .3s;
+    text-decoration: none;
+}
+
+.login__link:hover {
+    opacity: .6;
 }
