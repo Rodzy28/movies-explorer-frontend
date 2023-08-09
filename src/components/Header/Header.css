@@ -23,6 +23,11 @@
   opacity: .6;
 }
 
+.header__logo-size {
+  width: 38px;
+  height: 38px;
+}
+
 @media screen and (max-width: 900px) {
   .header__container {
     display: flex;
