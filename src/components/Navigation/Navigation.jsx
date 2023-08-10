@@ -1,11 +1,13 @@
-import { Link } from 'react-router-dom';
 import './Navigation.css';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
     return (
-        <div className='header__links'>
-            <Link to='/sign-up' className='header__link'>Регистрация</Link>
-            <Link to='/sign-in' className='header__link'>Войти</Link>
-        </div>
+        <nav className='navigation'>
+            <ul className='navigation__list'>
+                <li className='navigation__item'><Link className='navigation__link' to='/'>Фильмы</Link></li>
+                <li className='navigation__item'><Link className='navigation__link' to='/'>Сохранённые фильмы</Link></li>
+            </ul>
+        </nav>
     );
 }
