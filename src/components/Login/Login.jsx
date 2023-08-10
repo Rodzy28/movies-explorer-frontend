@@ -7,6 +7,10 @@ export default function Login({ children }) {
 
     const { pathname } = useLocation();
 
+    function handleSubmit(e) {
+        e.preventDefault();
+    }
+
     return (
         <main className='login'>
             <div className='login__container'>
@@ -18,7 +22,7 @@ export default function Login({ children }) {
                     {pathname === '/sign-in' ? <h1 className='login__title'>Рады видеть!</h1> : <h1 className='login__title'>Добро пожаловать!</h1>}
                 </div>
 
-                <form className='form'>
+                <form className='form' id='sign-form'>
                     {children}
                     <label className='form__label'>
                         <span className='form__label-title'>E-mail</span>
@@ -35,7 +39,7 @@ export default function Login({ children }) {
                 </form>
 
                 <div className={`login__button ${pathname === '/sign-in' ? 'login__button_padding' : ''}`}>
-                    <button className='button_blue' type='submit'>
+                    <button className='button_blue' type='submit' form='sign-form' onSubmit={handleSubmit}>
                         {pathname === '/sign-in' ? 'Войти' : 'Зарегистрироваться'}
                     </button>
                     <span className='login__text'>
