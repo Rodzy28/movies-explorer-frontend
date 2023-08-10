@@ -6,7 +6,7 @@ export default function Register() {
             <label className='form__label'>
                 <span className='form__label-title'>Имя</span>
                 <input className='form__input' type='text' name='name'
-                    placeholder='Виталий' minLength='3' maxLength='30' autoComplete='off' required />
+                    placeholder='Введите имя' minLength='3' maxLength='30' autoComplete='off' required />
             </label>
             <span className='form__input-error'>Что-то пошло не так...</span>
         </Login>

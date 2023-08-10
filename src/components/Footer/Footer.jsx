@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <section className='footer'>
+    <footer className='footer'>
       <h3 className='footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</h3>
       <div className='footer__info'>
         <p className='footer__copyright'>&copy; 2023</p>
@@ -20,6 +20,6 @@ export default function Footer() {
           </li>
         </ul>
       </div>
-    </section>
+    </footer>
   );
 }
