@@ -67,3 +67,34 @@
   opacity: .7;
   box-shadow: 0px 3px 14px 10px rgba(0, 0, 0, 0.08);
 }
+
+
+.navigation__button-burger {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    display: none;
+  }
+
+  .navigation__button {
+    display: none;
+  }
+
+  .navigation__button-burger {
+    display: block;
+    background-image: url('../../images/button-burger.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .navigation__button-burger {
+    width: 40px;
+    background-size: 40px;
+  }
+}

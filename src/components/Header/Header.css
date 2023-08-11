@@ -69,13 +69,11 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 500px) {
   .header__container {
     width: calc(100vw - 28px)
   }
-}
 
-@media screen and (max-width: 425px) {
   .header__links {
     gap: 14px;
   }

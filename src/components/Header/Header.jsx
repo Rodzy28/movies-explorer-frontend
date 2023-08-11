@@ -16,8 +16,9 @@ export default function Header({ loggedIn }) {
             <Navigation />
             <Link className='navigation__button' to='/profile'>
               <span>Аккаунт</span>
-              <div className='navigation__button-icon' />
+              <span className='navigation__button-icon' />
             </Link>
+            <span className='navigation__button-burger' />
           </>
           :
           <div className='header__links'>

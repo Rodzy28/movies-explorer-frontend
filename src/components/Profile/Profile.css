@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 70px;
 }
 
 .profile__title {
@@ -78,4 +79,42 @@
     font-weight: 500;
     line-height: normal;
     text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .profile{
+        margin-bottom: 269px;
+    }
+    .profile__title {
+        margin-top: 236px;
+        margin-bottom: 96px;
+    }
+
+    .profile-form__button {
+        margin-top: 194px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profile {
+        margin-bottom: 40px;
+    }
+
+    .profile-form {
+        max-width: 260px;
+    }
+
+    .profile__title {
+        margin-top: 70px;
+        margin-bottom: 80px;
+    }
+
+    .profile-form__button {
+        margin-top: 363px;
+        font-size: 12px;
+    }
+
+    .profile-form__logout {
+        font-size: 12px;
+    }
 }
