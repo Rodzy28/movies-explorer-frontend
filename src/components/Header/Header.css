@@ -71,7 +71,7 @@
 
 @media screen and (max-width: 500px) {
   .header__container {
-    width: calc(100vw - 28px)
+    width: calc(320px - 28px)
   }
 
   .header__links {

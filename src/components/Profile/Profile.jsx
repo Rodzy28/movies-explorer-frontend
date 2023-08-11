@@ -50,7 +50,12 @@ export default function Profile() {
                     <Link className='profile-form__logout' to='/'>Выйти из аккаунта</Link>
                 </>
             }
-            {showButton && <BigBlueBtn buttonText={'Сохранить'} idForm={'profile-form'} />}
+            {showButton &&
+                <>
+                    <span className='profile__error'>Тут будет текст ошибки</span>
+                    <BigBlueBtn buttonText={'Сохранить'} idForm={'profile-form'} />
+                </>
+            }
 
         </main>
     );

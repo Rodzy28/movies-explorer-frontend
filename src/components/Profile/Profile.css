@@ -92,17 +92,22 @@
     margin: 0 auto;
 }
 
+.profile__error {
+    color: #FF004C;
+    font-size: 11px;
+    line-height: normal;
+    min-height: 14px;
+    margin-bottom: 20px;
+}
+
 @media screen and (max-width: 768px) {
-    .profile{
-        margin-bottom: 269px;
-    }
     .profile__title {
         margin-top: 236px;
         margin-bottom: 96px;
     }
 
-    .profile-form__button {
-        margin-top: 194px;
+    .profile-form {
+        margin-bottom: 210px;
     }
 }
 
@@ -113,6 +118,7 @@
 
     .profile-form {
         max-width: 260px;
+        margin-bottom: 380px;
     }
 
     .profile__title {
@@ -121,7 +127,6 @@
     }
 
     .profile-form__button {
-        margin-top: 363px;
         font-size: 12px;
     }
 
