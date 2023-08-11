@@ -18,8 +18,8 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
-    name: 'Сергей',
-    email: 'test@test.ru'
+    name: 'Виталий',
+    email: 'pochta@yandex.ru',
   });
 
   return (

@@ -19,7 +19,10 @@ export default function Login({ children }) {
                     <Link className='login__logo' to='/'>
                         <img className='login__logo-size' src={logo} alt='Логотип' />
                     </Link>
-                    {pathname === '/sign-in' ? <h1 className='login__title'>Рады видеть!</h1> : <h1 className='login__title'>Добро пожаловать!</h1>}
+                    {pathname === '/sign-in'
+                        ? <h1 className='login__title'>Рады видеть!</h1>
+                        : <h1 className='login__title'>Добро пожаловать!</h1>
+                    }
                 </div>
 
                 <form className='form' id='sign-form'>
@@ -29,7 +32,7 @@ export default function Login({ children }) {
                         <input className='form__input' type='email' name='email'
                             placeholder='Введите E-mail' autoComplete='off' required />
                     </label>
-                    <span className='form__input-error'>Что-то пошло не так...</span>
+                    <span className='form__input-error'></span>
                     <label className='form__label'>
                         <span className='form__label-title'>Пароль</span>
                         <input className='form__input' type='password' name='password'
@@ -40,12 +43,21 @@ export default function Login({ children }) {
 
                 <div className={`login__button ${pathname === '/sign-in' ? 'login__button_padding' : ''}`}>
                     <button className='button_blue' type='submit' form='sign-form' onSubmit={handleSubmit}>
-                        {pathname === '/sign-in' ? 'Войти' : 'Зарегистрироваться'}
+                        {pathname === '/sign-in'
+                            ? 'Войти'
+                            : 'Зарегистрироваться'
+                        }
                     </button>
                     <span className='login__text'>
-                        {pathname === '/sign-in' ? 'Ещё не зарегистрированы?' : 'Уже зарегистрированы?'}
+                        {pathname === '/sign-in'
+                            ? 'Ещё не зарегистрированы?'
+                            : 'Уже зарегистрированы?'
+                        }
                     </span>
-                    {pathname === '/sign-in' ? <Link className='login__link' to='/sign-up'>Регистрация</Link> : <Link className='login__link' to='/sign-in'>Войти</Link>}
+                    {pathname === '/sign-in'
+                        ? <Link className='login__link' to='/sign-up'>Регистрация</Link>
+                        : <Link className='login__link' to='/sign-in'>Войти</Link>
+                    }
                 </div>
             </div>
 
