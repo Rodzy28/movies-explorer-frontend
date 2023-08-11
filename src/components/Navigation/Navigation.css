@@ -71,6 +71,12 @@
 
 .navigation__button-burger {
   display: none;
+  transition: opacity .4s;
+  cursor: pointer;
+}
+
+.navigation__button-burger:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 768px) {
