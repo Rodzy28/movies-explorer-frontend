@@ -2,6 +2,7 @@ import './Profile.css';
 import { useContext, useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { Link } from 'react-router-dom';
+import BigBlueBtn from '../BigBlueBtn/BigBlueBtn';
 
 export default function Profile() {
 
@@ -14,9 +15,6 @@ export default function Profile() {
         setEmail(currentUser.email);
     }, [currentUser]);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-    }
 
     function handleName(e) {
         setName(e.target.value);
@@ -26,6 +24,9 @@ export default function Profile() {
         setEmail(e.target.value);
     }
 
+    const [showButton, setShowButton] = useState(false);
+    const toggleShowButton = () => setShowButton(!showButton);
+
     return (
         <main className='profile'>
             <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
@@ -34,19 +35,23 @@ export default function Profile() {
                     <span className='profile-form__title'>Имя</span>
                     <input className='profile-form__input' type='text' name='name'
                         placeholder='Введите имя' autoComplete='off' minLength='3' maxLength='30'
-                        value={name || ''} onChange={handleName} required />
+                        value={name || ''} onChange={handleName} disabled={!showButton} />
                 </label>
-                <span className='profile-form__input-error'></span>
                 <label className='profile-form__label'>
                     <span className='profile-form__title'>E-mail</span>
                     <input className='profile-form__input' type='email' name='email'
-                        placeholder='Введите e-mail' minLength='5' maxLength='15' autoComplete='off'
-                        value={email || ''} onChange={handleEmail} required />
+                        placeholder='Введите e-mail' autoComplete='off'
+                        value={email || ''} onChange={handleEmail} disabled={!showButton} />
                 </label>
-                <span className='profile-form__input-error'>Что-то пошло не так...</span>
-                <button form='profile-form' className='profile-form__button' onSubmit={handleSubmit}>Редактировать</button>
-                <Link className='profile-form__logout' to='/'>Выйти из аккаунта</Link>
             </form>
+            {!showButton &&
+                <>
+                    <span className='profile-form__button' onClick={toggleShowButton}>Редактировать</span>
+                    <Link className='profile-form__logout' to='/'>Выйти из аккаунта</Link>
+                </>
+            }
+            {showButton && <BigBlueBtn buttonText={'Сохранить'} idForm={'profile-form'} />}
+
         </main>
     );
 }

@@ -12,7 +12,8 @@ export default function Header({ loggedIn }) {
           <img className='header__logo-size' src={logo} alt='Логотип' />
         </Link>
         {loggedIn
-          ? <>
+          ? 
+          <>
             <Navigation />
             <Link className='navigation__button' to='/profile'>
               <span>Аккаунт</span>
