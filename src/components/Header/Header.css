@@ -20,6 +20,7 @@
 .header__logo {
   font-size: 0;
   transition: opacity .3s;
+  margin-right: 65px;
 }
 
 .header__logo:hover {

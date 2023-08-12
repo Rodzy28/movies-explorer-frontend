@@ -2,8 +2,34 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
+import BurgerBtn from '../BurgerBtn/BurgerBtn';
+import ProfileBtn from '../ProfileBtn/ProfileBtn';
+import { useEffect, useState } from 'react';
 
 export default function Header({ loggedIn }) {
+
+  let windowSize;
+
+  const WindowWidth = (() => {
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+
+      function handleResize() {
+        setWidth(window.innerWidth);
+      }
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      }
+    }, [setWidth])
+
+    return width < 769;
+  });
+
+  windowSize = WindowWidth();
 
   return (
     <header className={`header ${!loggedIn ? 'header_dark' : ''}`}>
@@ -12,14 +38,11 @@ export default function Header({ loggedIn }) {
           <img className='header__logo-size' src={logo} alt='Логотип' />
         </Link>
         {loggedIn
-          ? 
+          ?
           <>
-            <Navigation />
-            <Link className='navigation__button' to='/profile'>
-              <span>Аккаунт</span>
-              <span className='navigation__button-icon' />
-            </Link>
-            <span className='navigation__button-burger' />
+            {!windowSize ? <Navigation /> : ''}
+            {!windowSize ? <ProfileBtn /> : ''}
+            {windowSize ? <BurgerBtn /> : ''}
           </>
           :
           <div className='header__links'>
