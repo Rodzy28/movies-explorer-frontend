@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './BurgerBtn.css'
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ProfileBtn from '../ProfileBtn/ProfileBtn';
 
 export default function BurgerBtn() {
@@ -17,7 +17,9 @@ export default function BurgerBtn() {
                     <div className='burger__cover'>
                         <nav className='burger__menu'>
                             <ul className='burger__links'>
-                                <li className='burger__item'><Link className='burger__link' to='/'>Главная</Link></li>
+                                <li className='burger__item'>
+                                    <NavLink className={({ isActive }) => `burger__link ${isActive ? 'burger__link_active' : ''}`} to='/'>Главная</NavLink>
+                                </li>
                                 <li className='burger__item'>
                                     <NavLink className={({ isActive }) => `burger__link ${isActive ? 'burger__link_active' : ''}`} to='/movies'>Фильмы</NavLink>
                                 </li>

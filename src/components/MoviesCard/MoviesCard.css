@@ -1,0 +1,56 @@
+.movie-card {
+    max-width: 270px;
+}
+
+.movie-card__image {
+    margin-bottom: 10px;
+}
+
+.movie-card__about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 6px;
+}
+
+.movie-card__title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.movie-card__like {
+    padding: 0;
+    border: 0;
+    background-image: url('../../images/button-like.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #F9F9F9;
+    border-radius: 50%;
+    min-width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: box-shadow .6s;
+    margin-left: 10px;
+}
+
+.movie-card__like:hover {
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, .09);
+}
+
+.movie-card__like_active {
+    background-image: url('../../images/button-like_active.svg');
+}
+
+.movie-card__duration {
+    margin: 0;
+    color: #A0A0A0;
+    font-size: 11px;
+    line-height: normal;
+}

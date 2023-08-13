@@ -9,12 +9,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
+import Movies from '../Movies/Movies';
 
 export default function App() {
 
   const { pathname } = useLocation();
-  const routeWithFooter = ['/'];
-  const routeWithHeader = ['/', '/profile'];
+  const routeWithFooter = ['/', '/movies'];
+  const routeWithHeader = ['/', '/profile', '/movies'];
 
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
@@ -31,6 +32,7 @@ export default function App() {
           <Route path='/sign-up' element={<Register />} />
           <Route path='/sign-in' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/movies' element={<Movies />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         {routeWithFooter.includes(pathname) ? <Footer /> : ''}
