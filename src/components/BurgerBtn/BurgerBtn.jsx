@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './BurgerBtn.css'
 import { NavLink } from 'react-router-dom';
 import ProfileBtn from '../ProfileBtn/ProfileBtn';
@@ -7,6 +7,10 @@ export default function BurgerBtn() {
 
     const [menuOpen, setMenuOpen] = useState(false);
     const showMenu = () => setMenuOpen(!menuOpen);
+
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : "unset";
+    }, [menuOpen]);
 
     return (
         <>

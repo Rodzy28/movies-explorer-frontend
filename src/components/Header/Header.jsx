@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
@@ -7,6 +7,8 @@ import ProfileBtn from '../ProfileBtn/ProfileBtn';
 import { useEffect, useState } from 'react';
 
 export default function Header({ loggedIn }) {
+
+  const { pathname } = useLocation();
 
   let windowSize;
 
@@ -32,23 +34,24 @@ export default function Header({ loggedIn }) {
   windowSize = WindowWidth();
 
   return (
-    <header className={`header ${!loggedIn ? 'header_dark' : ''}`}>
+    <header className={`header ${pathname === '/' ? 'header_dark' : ''}`}>
       <div className='header__container'>
         <Link to='/' className='header__logo'>
           <img className='header__logo-size' src={logo} alt='Логотип' />
         </Link>
-        {loggedIn
+        {pathname === '/'
           ?
+          <div className='header__links'>
+            <Link to='/sign-up' className='header__link'>Регистрация</Link>
+            <Link to='/sign-in' className='header__link'>Войти</Link>
+          </div>
+          :
           <>
             {!windowSize ? <Navigation /> : ''}
             {!windowSize ? <ProfileBtn /> : ''}
             {windowSize ? <BurgerBtn /> : ''}
           </>
-          :
-          <div className='header__links'>
-            <Link to='/sign-up' className='header__link'>Регистрация</Link>
-            <Link to='/sign-in' className='header__link'>Войти</Link>
-          </div>}
+        }
       </div>
     </header>
   );

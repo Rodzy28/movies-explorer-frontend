@@ -19,7 +19,7 @@ export default function App() {
   const routeWithHeader = ['/', '/profile', '/movies', '/saved-movies'];
 
   // Хардкод
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: 'Виталий',
     email: 'pochta@yandex.ru',
@@ -28,7 +28,7 @@ export default function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        {routeWithHeader.includes(pathname) ? <Header loggedIn={loggedIn} /> : ''}
+        {routeWithHeader.includes(pathname) ? <Header /> : ''}
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/sign-up' element={<Register />} />
