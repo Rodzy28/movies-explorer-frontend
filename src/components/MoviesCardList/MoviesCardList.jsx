@@ -11,17 +11,6 @@ export default function MoviesCardList() {
                 <MoviesCard />
                 <MoviesCard />
                 <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
             </ul>
             <button className="movies__button-more" type="button">Ещё</button>
         </section>

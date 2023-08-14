@@ -42,3 +42,25 @@
     height: 34px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 900px) {
+    .search {
+        margin: 80px 30px 57px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .search {
+        margin: 84px 14px 51px;
+    }
+
+    .search__input {
+        font-size: 18px;
+        width: 75%;
+    }
+
+    .search__form {
+        padding-bottom: 9px;
+        margin-bottom: 41px;
+    }
+}
