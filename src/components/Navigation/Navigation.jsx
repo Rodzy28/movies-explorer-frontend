@@ -1,12 +1,12 @@
 import './Navigation.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function Navigation() {
     return (
         <nav className='navigation'>
             <ul className='navigation__list'>
-                <li className='navigation__item'><Link className='navigation__link' to='/movies'>Фильмы</Link></li>
-                <li className='navigation__item'><Link className='navigation__link' to='/saved-movies'>Сохранённые фильмы</Link></li>
+                <li className='navigation__item'><NavLink className={({isActive}) => `navigation__link ${isActive ? 'navigation__link_active' : ''}`} to='/movies'>Фильмы</NavLink></li>
+                <li className='navigation__item'><NavLink className={({isActive}) => `navigation__link ${isActive ? 'navigation__link_active' : ''}`} to='/saved-movies'>Сохранённые фильмы</NavLink></li>
             </ul>
         </nav>
     );

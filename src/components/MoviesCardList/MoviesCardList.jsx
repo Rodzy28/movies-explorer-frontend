@@ -1,5 +1,6 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 
 export default function MoviesCardList() {
 
@@ -11,6 +12,14 @@ export default function MoviesCardList() {
                 <MoviesCard />
                 <MoviesCard />
                 <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                {/* <Preloader /> */}
             </ul>
             <button className="movies__button-more" type="button">Ещё</button>
         </section>
