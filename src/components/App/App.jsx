@@ -10,12 +10,13 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 export default function App() {
 
   const { pathname } = useLocation();
-  const routeWithFooter = ['/', '/movies'];
-  const routeWithHeader = ['/', '/profile', '/movies'];
+  const routeWithFooter = ['/', '/movies', '/saved-movies'];
+  const routeWithHeader = ['/', '/profile', '/movies', '/saved-movies'];
 
   // Хардкод
   const [loggedIn, setLoggedIn] = useState(true);
@@ -34,6 +35,7 @@ export default function App() {
           <Route path='/sign-in' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/movies' element={<Movies />} />
+          <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         {routeWithFooter.includes(pathname) ? <Footer /> : ''}
