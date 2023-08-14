@@ -17,6 +17,7 @@ export default function App() {
   const routeWithFooter = ['/', '/movies'];
   const routeWithHeader = ['/', '/profile', '/movies'];
 
+  // Хардкод
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
     name: 'Виталий',
