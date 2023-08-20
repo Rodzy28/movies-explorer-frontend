@@ -54,7 +54,7 @@ export default function Profile({ onUpdateUser, handleLogOut, errorMessage }) {
         </>
         :
         <>
-
+          <span className='profile__error'>{errorMessage}</span>
           <BigBlueBtn buttonText={'Сохранить'} idForm={'profile-form'} disabled={!isValid} />
         </>
       }
