@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import BigBlueBtn from '../BigBlueBtn/BigBlueBtn';
 import FormInput from '../FormInput/FormInput';
+import { useState } from 'react';
 
 export default function Login({ handleLogin }) {
+
+    const [disabled, setDisabled] = useState();
 
     return (
         <main className='login'>
@@ -16,9 +19,9 @@ export default function Login({ handleLogin }) {
                     <h1 className='login__title'>Рады видеть!</h1>
                 </div>
                 <div className='login__form'>
-                    <FormInput handleLogin={handleLogin} />
+                    <FormInput handleLogin={handleLogin} setDisabled={setDisabled} />
                 </div>
-                <BigBlueBtn buttonText={'Войти'} idForm={'sign-form'} />
+                <BigBlueBtn buttonText={'Войти'} idForm={'sign-form'} disabled={disabled} />
                 <div className='login__links'>
                     <span className='login__text'>Ещё не зарегистрированы?</span>
                     <Link className='login__link' to='/sign-up'>Регистрация</Link>
