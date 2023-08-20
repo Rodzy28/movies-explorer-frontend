@@ -22,9 +22,12 @@ export default function Profile({ onUpdateUser, handleLogOut, errorMessage }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setShowButton(false);
     onUpdateUser(values);
   }
+
+  useEffect(() => {
+    setShowButton(false)
+  }, [currentUser])
 
   const [showButton, setShowButton] = useState(false);
   const toggleShowButton = () => setShowButton(true);

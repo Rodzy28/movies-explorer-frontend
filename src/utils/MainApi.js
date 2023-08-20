@@ -5,7 +5,7 @@ class MainApi {
   }
 
   _handlerServerResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    return res.ok ? res.json() : Promise.reject(res.status);
   }
 
   _request(url, options) {

@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -12,6 +12,7 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import mainApi from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 export default function App() {
 
@@ -22,7 +23,8 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [errorMessage, setErrorMessage] = useState('test');
+  const [errorMessage, setErrorMessage] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
 
   function handleRegister(data) {
     mainApi.registration(data)
@@ -59,16 +61,21 @@ export default function App() {
     mainApi.setUserInfo(userData)
       .then(userData => {
         setCurrentUser(userData);
-        // closeAllPopups();
+        setErrorMessage('Данные успешно обновлены');
+        setTimeout(() => setErrorMessage(null), 3000);
       })
       .catch((err) => {
         if (err === 409) {
-          setErrorMessage(':)');
+          setErrorMessage('Такой пользователь уже существует');
+        } else {
+          setErrorMessage('На сервере произошла ошибка, попробуйте позже');
         }
+        setTimeout(() => setErrorMessage(null), 3000);
       })
       // .finally(() => {
       //   setIsLoading(false);
       // });
+
   }
 
   function handleLogOut() {
@@ -101,6 +108,14 @@ export default function App() {
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    if (loggedIn) {
+      if (pathname === '/sign-in' || pathname === '/sign-up') {
+        navigate('/movies')
+      }
+    }
+  }, [loggedIn, pathname, navigate])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
@@ -109,10 +124,38 @@ export default function App() {
           <Route path='/' element={<Main />} />
           <Route path='/sign-up' element={<Register handleRegister={handleRegister} />} />
           <Route path='/sign-in' element={<Login handleLogin={handleLogin} />} />
-          <Route path='/profile' element={<Profile onUpdateUser={handleUpdateUser} handleLogOut={handleLogOut} errorMessage={errorMessage} />} />
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='*' element={<NotFound />} />
+
+          <Route path='/profile'
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                onUpdateUser={handleUpdateUser}
+                handleLogOut={handleLogOut}
+                errorMessage={errorMessage}
+              />
+            }
+          />
+
+          <Route path='/movies'
+            element={
+              <ProtectedRoute
+                element={Movies}
+                loggedIn={loggedIn}
+              />
+            }
+          />
+
+          <Route path='/saved-movies'
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+              />
+            }
+          />
+
+          <Route path='*' element={loggedIn ? <Navigate to="/movies" /> : <NotFound />} />
         </Routes>
         {routeWithFooter.includes(pathname) ? <Footer /> : ''}
       </div>
