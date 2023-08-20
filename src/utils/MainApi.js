@@ -22,7 +22,7 @@ class MainApi {
         email: data.email,
         password: data.password
       })
-    })
+    });
   }
 
   login(data) {
@@ -34,7 +34,7 @@ class MainApi {
         email: data.email,
         password: data.password
       })
-    })
+    });
   }
 
   getUserInfo() {

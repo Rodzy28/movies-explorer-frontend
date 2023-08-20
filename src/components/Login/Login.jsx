@@ -5,7 +5,7 @@ import BigBlueBtn from '../BigBlueBtn/BigBlueBtn';
 import FormInput from '../FormInput/FormInput';
 import { useState } from 'react';
 
-export default function Login({ handleLogin }) {
+export default function Login({ handleLogin, errorMessage }) {
 
     const [disabled, setDisabled] = useState();
 
@@ -19,7 +19,7 @@ export default function Login({ handleLogin }) {
                     <h1 className='login__title'>Рады видеть!</h1>
                 </div>
                 <div className='login__form'>
-                    <FormInput handleLogin={handleLogin} setDisabled={setDisabled} />
+                    <FormInput handleLogin={handleLogin} setDisabled={setDisabled} errorMessage={errorMessage} />
                 </div>
                 <BigBlueBtn buttonText={'Войти'} idForm={'sign-form'} disabled={disabled} />
                 <div className='login__links'>

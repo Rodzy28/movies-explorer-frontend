@@ -49,3 +49,33 @@
 .form__input-error:last-child {
   margin: 0;
 }
+
+.form__error-register {
+  color: #FF004C;
+  font-size: 11px;
+  line-height: normal;
+  min-height: 14px;
+  margin-top: 97px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form__error-login {
+  color: #FF004C;
+  font-size: 11px;
+  line-height: normal;
+  min-height: 14px;
+  margin-top: 165px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .form__error-register {
+    margin-top: 185px;
+  }
+
+  .form__error-login {
+    margin-top: 253px;
+  }
+}

@@ -1,6 +1,7 @@
 import './App.css';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -8,7 +9,6 @@ import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
-import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import mainApi from '../../utils/MainApi';
@@ -23,18 +23,23 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   // const [isLoading, setIsLoading] = useState(false);
 
   function handleRegister(data) {
     mainApi.registration(data)
       .then(() => {
         // setIsSuccess(true);
-        navigate("/sign-in", { replace: true })
+        navigate("/sign-in", { replace: true });
       })
       .catch((err) => {
         // setIsSuccess(false);
-        console.log(err);
+        if (err === 409) {
+          setErrorMessage('Пользователь с таким email уже существует.');
+        } else {
+          setErrorMessage('При регистрации пользователя произошла ошибка.');
+        }
+        setTimeout(() => setErrorMessage(null), 2000);
       })
     // .finally(() => {
     //   setIsInfoTooltipPopupOpen(true);
@@ -52,8 +57,14 @@ export default function App() {
       .catch((err) => {
         // setIsSuccess(false);
         // setIsInfoTooltipPopupOpen(true);
-        console.log(err);
-      });
+        if (err === 401) {
+          setErrorMessage('Вы ввели неправильный логин или пароль.');
+        } else if (err === 400) {
+          setErrorMessage('Неправильная почта или пароль.');
+        } else {
+          setErrorMessage('На сервере произошла ошибка.');
+        }
+      })
   }
 
   function handleUpdateUser(userData) {
@@ -62,19 +73,19 @@ export default function App() {
       .then(userData => {
         setCurrentUser(userData);
         setErrorMessage('Данные успешно обновлены');
-        setTimeout(() => setErrorMessage(null), 3000);
+        setTimeout(() => setErrorMessage(null), 2000);
       })
       .catch((err) => {
         if (err === 409) {
-          setErrorMessage('Такой пользователь уже существует');
+          setErrorMessage('Пользователь с таким email уже существует.');
         } else {
-          setErrorMessage('На сервере произошла ошибка, попробуйте позже');
+          setErrorMessage('При обновлении профиля произошла ошибка.');
         }
-        setTimeout(() => setErrorMessage(null), 3000);
+        setTimeout(() => setErrorMessage(null), 2000);
       })
-      // .finally(() => {
-      //   setIsLoading(false);
-      // });
+    // .finally(() => {
+    //   setIsLoading(false);
+    // });
 
   }
 
@@ -98,15 +109,15 @@ export default function App() {
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      mainApi.getUserInfo()
-        .then((userData) => {
-          setCurrentUser(userData);
-        })
-        .catch(console.error);
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     mainApi.getUserInfo()
+  //       .then((userData) => {
+  //         setCurrentUser(userData);
+  //       })
+  //       .catch(console.error);
+  //   }
+  // }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -122,8 +133,8 @@ export default function App() {
         {routeWithHeader.includes(pathname) ? <Header loggedIn={loggedIn} /> : ''}
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/sign-up' element={<Register handleRegister={handleRegister} />} />
-          <Route path='/sign-in' element={<Login handleLogin={handleLogin} />} />
+          <Route path='/sign-up' element={<Register handleRegister={handleRegister} errorMessage={errorMessage} />} />
+          <Route path='/sign-in' element={<Login handleLogin={handleLogin} errorMessage={errorMessage} />} />
 
           <Route path='/profile'
             element={

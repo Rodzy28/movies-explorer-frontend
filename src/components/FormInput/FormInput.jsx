@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { useEffect } from 'react';
 
-export default function FormInput({ handleRegister, handleLogin, setDisabled }) {
+export default function FormInput({ handleRegister, handleLogin, setDisabled, errorMessage }) {
 
   const { pathname } = useLocation();
   const { values, handleChange, errors, isValid } = useFormAndValidation();
@@ -38,7 +38,7 @@ export default function FormInput({ handleRegister, handleLogin, setDisabled }) 
         </>
         : ''
       }
-      <label className='form__label form__label-title'>E-mai
+      <label className='form__label form__label-title'>E-mail
         <input className='form__input' type='email' name='email'
           placeholder='Введите E-mail' autoComplete='off' value={values.email || ''} onChange={handleChange} required />
       </label>
@@ -49,6 +49,7 @@ export default function FormInput({ handleRegister, handleLogin, setDisabled }) 
           placeholder='Введите пароль' minLength='5' maxLength='15' autoComplete='off' value={values.password || ''} onChange={handleChange} required />
       </label>
       <span className='form__input-error'>{errors.password}</span>
+      <span className={pathname === '/sign-up' ? 'form__error-register' : 'form__error-login'}>{errorMessage}</span>
     </form>
   )
 }
