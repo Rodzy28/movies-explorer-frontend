@@ -22,6 +22,7 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState('test');
 
   function handleRegister(data) {
     mainApi.registration(data)
@@ -60,7 +61,11 @@ export default function App() {
         setCurrentUser(userData);
         // closeAllPopups();
       })
-      .catch(console.error)
+      .catch((err) => {
+        if (err === 409) {
+          setErrorMessage(':)');
+        }
+      })
       // .finally(() => {
       //   setIsLoading(false);
       // });
@@ -104,7 +109,7 @@ export default function App() {
           <Route path='/' element={<Main />} />
           <Route path='/sign-up' element={<Register handleRegister={handleRegister} />} />
           <Route path='/sign-in' element={<Login handleLogin={handleLogin} />} />
-          <Route path='/profile' element={<Profile onUpdateUser={handleUpdateUser} handleLogOut={handleLogOut} />} />
+          <Route path='/profile' element={<Profile onUpdateUser={handleUpdateUser} handleLogOut={handleLogOut} errorMessage={errorMessage} />} />
           <Route path='/movies' element={<Movies />} />
           <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='*' element={<NotFound />} />
