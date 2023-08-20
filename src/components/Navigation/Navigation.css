@@ -35,3 +35,7 @@
   padding-bottom: 8px;
   box-sizing: border-box;
 }
+
+.navigation__link_color_white {
+  color: #FFF;
+}
