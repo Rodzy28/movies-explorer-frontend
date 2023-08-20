@@ -4,7 +4,7 @@ import FormInput from '../FormInput/FormInput';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
-export default function Register() {
+export default function Register({ handleRegister }) {
 
     return (
         <main className='register'>
@@ -16,14 +16,7 @@ export default function Register() {
                     <h1 className='register__title'>Добро пожаловать!</h1>
                 </div>
                 <div className='register__form'>
-                    <FormInput>
-                        <label className='form__label'>
-                            <span className='form__label-title'>Имя</span>
-                            <input className='form__input' type='text' name='name'
-                                placeholder='Введите имя' minLength='3' maxLength='30' autoComplete='off' required />
-                        </label>
-                        <span className='form__input-error'></span>
-                    </FormInput>
+                    <FormInput handleRegister={handleRegister} />
                 </div>
                 <BigBlueBtn buttonText={'Зарегистрироваться'} idForm={'sign-form'} />
                 <div className='register__links'>

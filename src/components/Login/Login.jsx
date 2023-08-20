@@ -4,7 +4,7 @@ import logo from '../../images/logo.svg';
 import BigBlueBtn from '../BigBlueBtn/BigBlueBtn';
 import FormInput from '../FormInput/FormInput';
 
-export default function Login() {
+export default function Login({ handleLogin }) {
 
     return (
         <main className='login'>
@@ -16,7 +16,7 @@ export default function Login() {
                     <h1 className='login__title'>Рады видеть!</h1>
                 </div>
                 <div className='login__form'>
-                    <FormInput />
+                    <FormInput handleLogin={handleLogin} />
                 </div>
                 <BigBlueBtn buttonText={'Войти'} idForm={'sign-form'} />
                 <div className='login__links'>

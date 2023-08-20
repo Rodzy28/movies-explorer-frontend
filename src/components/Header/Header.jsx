@@ -39,7 +39,7 @@ export default function Header({ loggedIn }) {
         <Link to='/' className='header__logo'>
           <img className='header__logo-size' src={logo} alt='Логотип' />
         </Link>
-        {pathname === '/'
+        {!loggedIn
           ?
           <div className='header__links'>
             <Link to='/sign-up' className='header__link'>Регистрация</Link>

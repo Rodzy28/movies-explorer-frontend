@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { Link } from 'react-router-dom';
 import BigBlueBtn from '../BigBlueBtn/BigBlueBtn';
 
-export default function Profile() {
+export default function Profile({ onUpdateUser, handleLogOut }) {
 
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState('');
@@ -15,6 +15,11 @@ export default function Profile() {
         setEmail(currentUser.email);
     }, [currentUser]);
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        setShowButton(false);
+        onUpdateUser({ name, email });
+    }
 
     function handleName(e) {
         setName(e.target.value);
@@ -25,12 +30,12 @@ export default function Profile() {
     }
 
     const [showButton, setShowButton] = useState(false);
-    const toggleShowButton = () => setShowButton(!showButton);
+    const toggleShowButton = () => setShowButton(true);
 
     return (
         <main className='profile'>
             <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
-            <form className='profile-form' id='profile-form'>
+            <form className='profile-form' id='profile-form' onSubmit={handleSubmit}>
                 <label className='profile-form__label'>
                     <span className='profile-form__title'>Имя</span>
                     <input className='profile-form__input' type='text' name='name'
@@ -44,17 +49,17 @@ export default function Profile() {
                         value={email || ''} onChange={handleEmail} disabled={!showButton} />
                 </label>
             </form>
-            {!showButton &&
-                <>
+            {!showButton
+                ?
+                (<>
                     <span className='profile-form__button' onClick={toggleShowButton}>Редактировать</span>
-                    <Link className='profile-form__logout' to='/'>Выйти из аккаунта</Link>
-                </>
-            }
-            {showButton &&
-                <>
+                    <Link className='profile-form__logout' to='/' onClick={handleLogOut}>Выйти из аккаунта</Link>
+                </>)
+                :
+                (<>
                     <span className='profile__error'>Тут будет текст ошибки</span>
                     <BigBlueBtn buttonText={'Сохранить'} idForm={'profile-form'} />
-                </>
+                </>)
             }
 
         </main>
