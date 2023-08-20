@@ -45,6 +45,7 @@ export default function Profile({ onUpdateUser, handleLogOut, errorMessage }) {
             placeholder='Введите e-mail' autoComplete='off'
             value={values.email || ''} onChange={handleChange} disabled={!showButton} required />
         </label>
+        <span className='profile__error'>{errorMessage}</span>
       </form>
       {!showButton
         ?
@@ -54,7 +55,6 @@ export default function Profile({ onUpdateUser, handleLogOut, errorMessage }) {
         </>
         :
         <>
-          <span className='profile__error'>{errorMessage}</span>
           <BigBlueBtn buttonText={'Сохранить'} idForm={'profile-form'} disabled={!isValid} />
         </>
       }
