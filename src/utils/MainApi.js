@@ -59,7 +59,7 @@ class MainApi {
 
   signOut() {
     return this._request(`${this._url}/signout`, {
-      method: 'post',
+      method: 'POST',
       credentials: 'include',
     })
   }
