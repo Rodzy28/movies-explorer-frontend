@@ -1,92 +1,92 @@
 .card {
-    width: 100%;
+  width: 100%;
 }
 
 .card__image {
-    margin-bottom: 10px;
-    width: 100%;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .card__about {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #E8E8E8;
-    margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #E8E8E8;
+  margin-bottom: 6px;
 }
 
 .card__title {
-    margin: 0;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: normal;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .card__save {
-    padding: 0;
-    border: 0;
-    background-image: url('../../images/button-like.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #F9F9F9;
-    border-radius: 50%;
-    min-width: 24px;
-    height: 24px;
-    cursor: pointer;
-    transition: box-shadow .6s;
-    margin-left: 10px;
+  padding: 0;
+  border: 0;
+  background-image: url('../../images/button-like.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #F9F9F9;
+  border-radius: 50%;
+  min-width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: box-shadow .6s;
+  margin-left: 10px;
 }
 
 .card__save:hover {
-    box-shadow: 0px 0px 2px 6px rgba(0, 0, 0, .15);
+  box-shadow: 0px 0px 2px 6px rgba(0, 0, 0, .15);
 }
 
 .card__save_active {
-    background-image: url('../../images/button-like_active.svg');
+  background-image: url('../../images/button-like_active.svg');
 }
 
 .card__dislike {
-    background-image: url('../../images/button-dislike.svg');
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image: url('../../images/button-dislike.svg');
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .card__duration {
-    margin: 0;
-    color: #A0A0A0;
-    font-size: 11px;
-    line-height: normal;
+  margin: 0;
+  color: #A0A0A0;
+  font-size: 11px;
+  line-height: normal;
 }
 
 @media screen and (max-width: 768px) {
-    .card {
-        max-width: 339px;
-    }
+  .card {
+    max-width: 339px;
+  }
 
-    .card__image {
-        margin-bottom: 6px;
-    }
+  .card__image {
+    margin-bottom: 6px;
+  }
 }
 
 @media screen and (max-width: 425px) {
-    .card {
-        max-width: 339px;
-    }
+  .card {
+    max-width: 339px;
+  }
 
-    .card__title {
+  .card__title {
 
-        font-size: 12px;
-    }
+    font-size: 12px;
+  }
 
-    .card__image {
-        margin-bottom: 10px;
-    }
+  .card__image {
+    margin-bottom: 10px;
+  }
 
-    .card__duration {
-        font-size: 10px;
-    }
+  .card__duration {
+    font-size: 10px;
+  }
 }

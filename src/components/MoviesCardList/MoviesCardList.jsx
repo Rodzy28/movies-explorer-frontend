@@ -1,40 +1,31 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 // import Preloader from '../Preloader/Preloader';
-import moviesApi from '../../utils/MoviesApi';
 
-function test() {
-  if (!localStorage.getItem('moviesBase')) {
-    moviesApi.getMovies()
-      .then((res) => {
-        localStorage.setItem('moviesBase', JSON.stringify(res));
-      })
-      .catch(console.error())
-  } else {
-    console.log('re');
-  }
-}
+export default function MoviesCardList({ foundMovies }) {
 
-const cardd = localStorage.getItem('moviesBase');
-const cards = JSON.parse(cardd);
-
-export default function MoviesCardList() {
+  const baseUrl = 'https://api.nomoreparties.co/';
 
   return (
     <section className='movies'>
       <ul className='movies__list'>
-        {cards.map((item) => (
-          <MoviesCard key={item.id}
-          movieFoto={item.trailerLink}
-          // card={card}
-          // onCardClick={onCardClick}
+        {foundMovies.map((movie) => (
+          <MoviesCard key={movie.id}
+            movieFoto={`${baseUrl}${movie.image.url}`}
+            movieName={movie.nameRU}
+            movieDuration={movie.duration}
+            movieTrailerLink={movie.trailerLink}
           // onCardLike={onCardLike}
           // onCardDelete={onCardDelete}
           />
         ))}
         {/* <Preloader /> */}
       </ul>
-      <button className='movies__button-more' type='button' onClick={test}>Ещё</button>
+
+
+      <button className='movies__button-more' type='button'>
+        Ещё
+      </button>
     </section>
   )
 }
