@@ -2,21 +2,15 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 // import Preloader from '../Preloader/Preloader';
 
-export default function MoviesCardList({ foundMovies }) {
-
-  const baseUrl = 'https://api.nomoreparties.co/';
+export default function MoviesCardList({ foundMovies, saveMovie }) {
 
   return (
     <section className='movies'>
       <ul className='movies__list'>
         {foundMovies.map((movie) => (
           <MoviesCard key={movie.id}
-            movieFoto={`${baseUrl}${movie.image.url}`}
-            movieName={movie.nameRU}
-            movieDuration={movie.duration}
-            movieTrailerLink={movie.trailerLink}
-          // onCardLike={onCardLike}
-          // onCardDelete={onCardDelete}
+            movie={movie}
+            saveMovie={saveMovie}
           />
         ))}
         {/* <Preloader /> */}

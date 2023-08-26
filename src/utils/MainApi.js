@@ -63,6 +63,17 @@ class MainApi {
       credentials: 'include',
     })
   }
+
+  addMovie(movieCard) {
+    return this._request(`${this._url}/movies`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify(movieCard)
+    });
+  }
+
+
 }
 
 const mainApi = new MainApi({

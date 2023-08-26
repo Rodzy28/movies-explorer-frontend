@@ -2,9 +2,10 @@ import './Movies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 import { useEffect, useState } from 'react';
 
-export default function Movies() {
+export default function Movies({savedMovies, setSavedMovies}) {
 
   const [localMoviesBase, setLocalMoviesBase] = useState(false);
   const [searchTitle, setSearchTitle] = useState('');
@@ -17,7 +18,7 @@ export default function Movies() {
     }
   }, [moviesBase, localMoviesBase])
 
-  function getMovies() {
+  function handleGetMovies() {
     !localMoviesBase &&
       moviesApi.getMovies()
         .then((moviesBase) => {
@@ -32,10 +33,21 @@ export default function Movies() {
     setFoundMovies(moviesBase.filter(item => item.nameRU.toLowerCase().includes(searchTitle.toLowerCase()) || item.nameEN.toLowerCase().includes(searchTitle.toLowerCase())));
   }
 
+  function handleSaveMovie(movieCard) {
+    mainApi.addMovie(movieCard)
+      .then((addMovieCard) => {
+        setSavedMovies([...savedMovies, addMovieCard]);
+        console.log(addMovieCard);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <main className="main">
-      <SearchForm getMovies={getMovies} setSearchTitle={setSearchTitle} />
-      <MoviesCardList foundMovies={foundMovies} />
+      <SearchForm getMovies={handleGetMovies} setSearchTitle={setSearchTitle} />
+      <MoviesCardList foundMovies={foundMovies} saveMovie={handleSaveMovie} />
     </main>
   )
 }

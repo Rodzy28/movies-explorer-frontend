@@ -24,6 +24,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [savedMovies, setSavedMovies] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
 
   function handleRegister(data) {
@@ -153,6 +154,8 @@ export default function App() {
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
               />
             }
           />
@@ -162,6 +165,8 @@ export default function App() {
               <ProtectedRoute
                 element={SavedMovies}
                 loggedIn={loggedIn}
+                savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
               />
             }
           />
