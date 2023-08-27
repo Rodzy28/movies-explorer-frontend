@@ -61,7 +61,7 @@ class MainApi {
     return this._request(`${this._url}/signout`, {
       method: 'POST',
       credentials: 'include',
-    })
+    });
   }
 
   addMovie(movieCard) {
@@ -73,7 +73,21 @@ class MainApi {
     });
   }
 
+  getUserMovies() {
+    return this._request(`${this._url}/movies`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: this._headers,
+    });
+  }
 
+  deleteMovie(movieId) {
+    return this._request(`${this._url}/movies/${movieId}`, {
+      method: "DELETE",
+      credentials: 'include',
+      headers: this._headers,
+    });
+  }
 }
 
 const mainApi = new MainApi({

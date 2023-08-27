@@ -1,29 +1,38 @@
 import './MoviesCard.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-export default function MoviesCard({ movie, saveMovie }) {
+export default function MoviesCard({ movie, saveMovie, savedMovies, deleteMovie }) {
 
   const baseUrl = 'https://api.nomoreparties.co';
   const { pathname } = useLocation();
   const [isSaved, setIsSaved] = useState(false);
 
   function handleLikeMovie() {
-    setIsSaved(!isSaved);
-    const movieCard = {
-      country: movie.country,
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      image: `${baseUrl}${movie.image.url}`,
-      trailerLink: movie.trailerLink,
-      thumbnail: `${baseUrl}${movie.image.formats.thumbnail.url}`,
-      movieId: movie.id,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-    };
-    saveMovie(movieCard);
+    if (isSaved) {
+      handleUnlikeMovie();
+      setIsSaved(false);
+    } else {
+      setIsSaved(!isSaved);
+      const movieCard = {
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `${baseUrl}${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `${baseUrl}${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      };
+      saveMovie(movieCard);
+    }
+  }
+
+  function handleUnlikeMovie() {
+    deleteMovie(movie.id || movie.movieId);
   }
 
   function durationMovie() {
@@ -35,16 +44,22 @@ export default function MoviesCard({ movie, saveMovie }) {
     return (`${hour}ч ${minutes}м`);
   }
 
+  useEffect(() => {
+    if (savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)) {
+      setIsSaved(true);
+    }
+  }, [movie.id, savedMovies])
+
   return (
     <li className="card">
       <Link to={movie.trailerLink} target='_blank'>
-        <img className='card__image' src={`${baseUrl}${movie.image.url}`} alt={`Постер фильма ${movie.nameRU}`} />
+        <img className='card__image' src={pathname === '/movies' ? `${baseUrl}${movie.image.url}` : movie.image} alt={`Постер фильма ${movie.nameRU}`} />
       </Link>
       <div className='card__about'>
         <h2 className='card__title'>{movie.nameRU}</h2>
         <button className={pathname === '/movies' ? `card__save ${isSaved && 'card__save_active'}` : 'card__save card__dislike'}
           type='button'
-          onClick={handleLikeMovie}>
+          onClick={pathname === '/movies' ? handleLikeMovie : handleUnlikeMovie}>
         </button>
       </div>
       <p className='card__duration'>{durationMovie()}</p>

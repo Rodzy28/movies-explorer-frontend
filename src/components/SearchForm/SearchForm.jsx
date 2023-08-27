@@ -1,9 +1,9 @@
 import './SearchForm.css';
 import Switch from '../Switch/Switch';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
-export default function SearchForm({ getMovies, setSearchTitle }) {
+export default function SearchForm({ checkLocalMovies }) {
 
   const { values, handleChange, isValid } = useFormAndValidation();
 
@@ -12,17 +12,19 @@ export default function SearchForm({ getMovies, setSearchTitle }) {
     if (!isValid) {
       console.log('Нужно ввести ключевое слово.');
     } else {
-      getMovies();
+      checkLocalMovies(values.search);
     }
   }
 
-  useEffect(() => {
-    setSearchTitle(values.search);
-  }, [setSearchTitle, values.search])
+  // useEffect(() => {
+  //   setSearchTitle(values.search);
+  // }, [setSearchTitle, values.search])
 
   return (
     <section className='search'>
-      <form className='search__form' id='search-form' onSubmit={handleSubmit} noValidate>
+      <form className='search__form' id='search-form'
+      onSubmit={handleSubmit}
+      noValidate>
         <label className='search__label'>
           <input className='search__input' type='text' name='search'
             placeholder='Фильм' minLength='1' maxLength='30' autoComplete='off'

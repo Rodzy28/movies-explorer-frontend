@@ -13,6 +13,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import moviesApi from '../../utils/MoviesApi';
 
 export default function App() {
 
@@ -24,7 +25,6 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
-  const [savedMovies, setSavedMovies] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
 
   function handleRegister(data) {
@@ -87,28 +87,29 @@ export default function App() {
     // .finally(() => {
     //   setIsLoading(false);
     // });
-
   }
 
   function handleLogOut() {
     mainApi.signOut()
       .then(() => {
         setLoggedIn(false);
+        localStorage.clear();
         navigate('/', { replace: true });
       })
       .catch(console.error);
   }
 
   useEffect(() => {
-    mainApi.getUserInfo()
-      .then((userData) => {
-        if (userData) {
+    if (loggedIn) {
+      Promise.all([mainApi.getUserInfo(), mainApi.getUserMovies()])
+        .then(([userData, userMovies]) => {
           setCurrentUser(userData);
-          setLoggedIn(true);
-        }
-      })
-      .catch(console.error);
-  }, []);
+          setSavedMovies(userMovies);
+        })
+        .catch(console.error);
+    }
+  }, [loggedIn]);
+
 
   // useEffect(() => {
   //   if (loggedIn) {
@@ -127,6 +128,58 @@ export default function App() {
       }
     }
   }, [loggedIn, pathname, navigate])
+
+  /////////////////////////////////////////////////////
+
+  const [foundMovies, setFoundMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  function getApiMovies(moviesName) {
+    moviesApi.getMovies()
+      .then((movies) => {
+        localStorage.setItem('moviesBase', JSON.stringify(movies));
+        searchLocalStorage(moviesName);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function checkLocalMovies(moviesName) {
+    const moviesBase = JSON.parse(localStorage.getItem('moviesBase'));
+    if (moviesBase === null) {
+      getApiMovies(moviesName);
+    } else {
+      searchLocalStorage(moviesName);
+    }
+  }
+
+  function searchLocalStorage(moviesName) {
+    setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
+      .filter(
+        item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
+          ||
+          item.nameEN.toLowerCase().includes(moviesName.toLowerCase())
+      ));
+  }
+
+  function handleSaveMovie(movieCard) {
+    mainApi.addMovie(movieCard)
+      .then((addMovieCard) => {
+        setSavedMovies([...savedMovies, addMovieCard]);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleDeleteMovie(movieId) {
+    const findMovie = savedMovies.find((movie) => movie.movieId === movieId);
+    mainApi.deleteMovie(findMovie._id)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(m => m.movieId !== movieId));
+      })
+      .catch((err) => console.log(err));
+  }
+
+
+  ////////////////////////////////////////////
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -152,10 +205,13 @@ export default function App() {
           <Route path='/movies'
             element={
               <ProtectedRoute
+                checkLocalMovies={checkLocalMovies}
                 element={Movies}
                 loggedIn={loggedIn}
+                foundMovies={foundMovies}
+                saveMovie={handleSaveMovie}
                 savedMovies={savedMovies}
-                setSavedMovies={setSavedMovies}
+                deleteMovie={handleDeleteMovie}
               />
             }
           />
@@ -166,7 +222,7 @@ export default function App() {
                 element={SavedMovies}
                 loggedIn={loggedIn}
                 savedMovies={savedMovies}
-                setSavedMovies={setSavedMovies}
+                deleteMovie={handleDeleteMovie}
               />
             }
           />
