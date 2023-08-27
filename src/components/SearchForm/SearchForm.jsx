@@ -3,7 +3,7 @@ import Switch from '../Switch/Switch';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 // import { useEffect } from 'react';
 
-export default function SearchForm({ checkLocalMovies }) {
+export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
 
   const { values, handleChange, isValid } = useFormAndValidation();
 
@@ -23,8 +23,8 @@ export default function SearchForm({ checkLocalMovies }) {
   return (
     <section className='search'>
       <form className='search__form' id='search-form'
-      onSubmit={handleSubmit}
-      noValidate>
+        onSubmit={handleSubmit}
+        noValidate>
         <label className='search__label'>
           <input className='search__input' type='text' name='search'
             placeholder='Фильм' minLength='1' maxLength='30' autoComplete='off'
@@ -33,7 +33,10 @@ export default function SearchForm({ checkLocalMovies }) {
           <button className='search__button' type='submit' form='search-form'>Найти</button>
         </label>
       </form>
-      <Switch />
+      <Switch
+        checked={checked}
+        setChecked={setChecked}
+       />
     </section>
   )
 }

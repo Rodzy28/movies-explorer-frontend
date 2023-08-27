@@ -133,6 +133,7 @@ export default function App() {
 
   const [foundMovies, setFoundMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [checked, setChecked] = useState(false);
 
   function getApiMovies(moviesName) {
     moviesApi.getMovies()
@@ -154,11 +155,7 @@ export default function App() {
 
   function searchLocalStorage(moviesName) {
     setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
-      .filter(
-        item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
-          ||
-          item.nameEN.toLowerCase().includes(moviesName.toLowerCase())
-      ));
+      .filter(item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase()) || item.nameEN.toLowerCase().includes(moviesName.toLowerCase())));
   }
 
   function handleSaveMovie(movieCard) {
@@ -177,7 +174,6 @@ export default function App() {
       })
       .catch((err) => console.log(err));
   }
-
 
   ////////////////////////////////////////////
 
@@ -212,6 +208,8 @@ export default function App() {
                 saveMovie={handleSaveMovie}
                 savedMovies={savedMovies}
                 deleteMovie={handleDeleteMovie}
+                checked={checked}
+                setChecked={setChecked}
               />
             }
           />
