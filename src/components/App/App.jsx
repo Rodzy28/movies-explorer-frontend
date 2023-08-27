@@ -134,6 +134,7 @@ export default function App() {
   const [foundMovies, setFoundMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [checked, setChecked] = useState(false);
+  let moviesBase = JSON.parse(localStorage.getItem('moviesBase'));
 
   function getApiMovies(moviesName) {
     moviesApi.getMovies()
@@ -145,7 +146,6 @@ export default function App() {
   }
 
   function checkLocalMovies(moviesName) {
-    const moviesBase = JSON.parse(localStorage.getItem('moviesBase'));
     if (moviesBase === null) {
       getApiMovies(moviesName);
     } else {
@@ -154,8 +154,17 @@ export default function App() {
   }
 
   function searchLocalStorage(moviesName) {
-    setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
-      .filter(item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase()) || item.nameEN.toLowerCase().includes(moviesName.toLowerCase())));
+    if (checked) {
+      setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
+        .filter(
+          item => (item.nameRU.toLowerCase().includes(moviesName.toLowerCase()) || item.nameEN.toLowerCase().includes(moviesName.toLowerCase())) && (item.duration < 40)
+        ));
+    } else {
+      setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
+        .filter(
+          item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase()) || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
+      )
+    }
   }
 
   function handleSaveMovie(movieCard) {
