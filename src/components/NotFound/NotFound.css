@@ -26,10 +26,13 @@
     font-size: 14px;
     line-height: normal;
     transition: opacity .3s;
+    background-color: transparent;
+    border: none;
 }
 
 .not-found__link:hover {
     opacity: .6;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {

@@ -93,8 +93,9 @@ export default function App() {
     mainApi.signOut()
       .then(() => {
         setLoggedIn(false);
+        setCurrentUser({});
         localStorage.clear();
-        navigate('/', { replace: true });
+        navigate('/');
       })
       .catch(console.error);
   }
@@ -110,16 +111,14 @@ export default function App() {
     }
   }, [loggedIn]);
 
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     mainApi.getUserInfo()
-  //       .then((userData) => {
-  //         setCurrentUser(userData);
-  //       })
-  //       .catch(console.error);
-  //   }
-  // }, [loggedIn]);
+  useEffect(() => {
+    mainApi.getUserInfo()
+      .then((userData) => {
+        setCurrentUser(userData);
+        setLoggedIn(true)
+      })
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -157,13 +156,16 @@ export default function App() {
     if (checked) {
       setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
         .filter(
-          item => (item.nameRU.toLowerCase().includes(moviesName.toLowerCase()) || item.nameEN.toLowerCase().includes(moviesName.toLowerCase())) && (item.duration < 40)
+          item => (item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
+            || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
+            && (item.duration < 40)
         ));
     } else {
       setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
         .filter(
-          item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase()) || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
-      )
+          item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
+            || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
+      );
     }
   }
 
