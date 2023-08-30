@@ -10,8 +10,6 @@ export default function Header({ loggedIn }) {
 
   const { pathname } = useLocation();
 
-  let windowSize;
-
   const WindowWidth = (() => {
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -31,7 +29,7 @@ export default function Header({ loggedIn }) {
     return width < 769;
   });
 
-  windowSize = WindowWidth();
+  let windowSize= WindowWidth();
 
   return (
     <header className={`header ${pathname === '/' ? 'header_dark' : ''}`}>

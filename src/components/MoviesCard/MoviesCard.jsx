@@ -52,7 +52,7 @@ export default function MoviesCard({ movie, saveMovie, savedMovies, deleteMovie 
 
   return (
     <li className="card">
-      <Link to={movie.trailerLink} target='_blank'>
+      <Link className='card__link' to={movie.trailerLink} target='_blank'>
         <img className='card__image' src={pathname === '/movies' ? `${baseUrl}${movie.image.url}` : movie.image} alt={`Постер фильма ${movie.nameRU}`} />
       </Link>
       <div className='card__about'>

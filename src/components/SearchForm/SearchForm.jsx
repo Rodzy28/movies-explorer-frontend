@@ -1,11 +1,11 @@
 import './SearchForm.css';
 import Switch from '../Switch/Switch';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
 
-  const { values, handleChange, isValid } = useFormAndValidation();
+  const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -13,12 +13,13 @@ export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
       console.log('Нужно ввести ключевое слово.');
     } else {
       checkLocalMovies(values.search);
+      localStorage.setItem('search', values.search);
     }
   }
 
-  // useEffect(() => {
-  //   setSearchTitle(values.search);
-  // }, [setSearchTitle, values.search])
+  useEffect(() => {
+    resetForm({ search: localStorage.getItem('search') });
+  }, [resetForm]);
 
   return (
     <section className='search'>
@@ -28,7 +29,7 @@ export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
         <label className='search__label'>
           <input className='search__input' type='text' name='search'
             placeholder='Фильм' minLength='1' maxLength='30' autoComplete='off'
-            values={values.search || ''}
+            value={values.search || ''}
             onChange={handleChange} required />
           <button className='search__button' type='submit' form='search-form'>Найти</button>
         </label>
@@ -36,7 +37,7 @@ export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
       <Switch
         checked={checked}
         setChecked={setChecked}
-       />
+      />
     </section>
   )
 }

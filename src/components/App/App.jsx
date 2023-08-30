@@ -30,11 +30,9 @@ export default function App() {
   function handleRegister(data) {
     mainApi.registration(data)
       .then(() => {
-        // setIsSuccess(true);
-        navigate("/sign-in", { replace: true });
+        handleLogin(data);
       })
       .catch((err) => {
-        // setIsSuccess(false);
         if (err === 409) {
           setErrorMessage('Пользователь с таким email уже существует.');
         } else {
@@ -56,8 +54,6 @@ export default function App() {
         }
       })
       .catch((err) => {
-        // setIsSuccess(false);
-        // setIsInfoTooltipPopupOpen(true);
         if (err === 401) {
           setErrorMessage('Вы ввели неправильный логин или пароль.');
         } else if (err === 400) {
@@ -69,7 +65,6 @@ export default function App() {
   }
 
   function handleUpdateUser(userData) {
-    // setIsLoading(true);
     mainApi.setUserInfo(userData)
       .then(userData => {
         setCurrentUser(userData);
@@ -115,7 +110,7 @@ export default function App() {
     mainApi.getUserInfo()
       .then((userData) => {
         setCurrentUser(userData);
-        setLoggedIn(true)
+        setLoggedIn(true);
       })
       .catch(console.error);
   }, []);
@@ -169,7 +164,7 @@ export default function App() {
     }
   }
 
-  function handleSaveMovie(movieCard) {
+   function handleSaveMovie(movieCard) {
     mainApi.addMovie(movieCard)
       .then((addMovieCard) => {
         setSavedMovies([...savedMovies, addMovieCard]);
