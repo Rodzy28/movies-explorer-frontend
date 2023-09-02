@@ -227,6 +227,8 @@ export default function App() {
                 loggedIn={loggedIn}
                 savedMovies={savedMovies}
                 deleteMovie={handleDeleteMovie}
+                checked={checked}
+                setChecked={setChecked}
               />
             }
           />

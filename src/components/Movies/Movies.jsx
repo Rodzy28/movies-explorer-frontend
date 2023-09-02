@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 // import moviesApi from '../../utils/MoviesApi';
 // import { useEffect, useState } from 'react';
 
-export default function Movies({ checkLocalMovies, foundMovies, saveMovie, savedMovies, deleteMovie, checked, setChecked }) {
+export default function Movies({ checkLocalMovies, foundMovies, saveMovie, savedMovies, deleteMovie, checked, setChecked, setFoundMovies }) {
 
   return (
     <main className="main">
@@ -18,6 +18,8 @@ export default function Movies({ checkLocalMovies, foundMovies, saveMovie, saved
         foundMovies={foundMovies}
         savedMovies={savedMovies}
         deleteMovie={deleteMovie}
+        checked={checked}
+        setFoundMovies={setFoundMovies}
       />
     </main>
   )

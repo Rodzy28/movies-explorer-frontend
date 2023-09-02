@@ -1,11 +1,11 @@
 import './SearchForm.css';
 import Switch from '../Switch/Switch';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
 
-  const { values, handleChange, isValid, resetForm } = useFormAndValidation();
+  const { values, handleChange, isValid, setValues } = useFormAndValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,8 +18,10 @@ export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
   }
 
   useEffect(() => {
-    resetForm({ search: localStorage.getItem('search') });
-  }, [resetForm]);
+    if (localStorage.getItem('search')) {
+      setValues({ ...values, 'search': localStorage.getItem('search') });
+    }
+  }, [])
 
   return (
     <section className='search'>
