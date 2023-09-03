@@ -91,7 +91,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.movies.rodzy28.nomoredomains.sbs',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',

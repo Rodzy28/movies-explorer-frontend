@@ -8,6 +8,7 @@ export default function SavedMovies({ savedMovies, deleteMovie }) {
   const [moviesToRender, setMoviesToRender] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const filteredByName = savedMovies.filter(movie => {
@@ -17,6 +18,10 @@ export default function SavedMovies({ savedMovies, deleteMovie }) {
         return movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) || movie.nameEN.toLowerCase().includes(searchValue.toLowerCase());
       }
     });
+
+    if (filteredByName.length === 0) {
+      setNotFound(true);
+    }
 
     setMoviesToRender(filteredByName);
     setIsLoading(false);
@@ -39,6 +44,7 @@ export default function SavedMovies({ savedMovies, deleteMovie }) {
         savedMovies={moviesToRender}
         deleteMovie={deleteMovie}
         isLoading={isLoading}
+        notFound={notFound}
       />
     </main>
   )

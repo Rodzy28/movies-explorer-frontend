@@ -32,7 +32,7 @@ export default function FormInput({ handleRegister, handleLogin, setDisabled, er
         <>
           <label className='form__label form__label-title'>Имя
             <input className='form__input' type='text' name='name'
-              placeholder='Введите имя' minLength='3' maxLength='30' autoComplete='off' value={values.name || ''} onChange={handleChange} required />
+              placeholder='Введите имя' minLength='3' maxLength='30' autoComplete='off' pattern='[a-zа-я\- ]{3,30}' value={values.name || ''} onChange={handleChange} required />
           </label>
           <span className='form__input-error'>{errors.name}</span>
         </>
@@ -40,7 +40,7 @@ export default function FormInput({ handleRegister, handleLogin, setDisabled, er
       }
       <label className='form__label form__label-title'>E-mail
         <input className='form__input' type='email' name='email'
-          placeholder='Введите E-mail' autoComplete='off' value={values.email || ''} onChange={handleChange} required />
+          placeholder='Введите E-mail' autoComplete='off' pattern='[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9\-]+.+.[a-zA-Z]{2,4}' value={values.email || ''} onChange={handleChange} required />
       </label>
       <span className='form__input-error'>{errors.email}</span>
 

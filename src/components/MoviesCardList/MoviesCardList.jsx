@@ -13,7 +13,7 @@ const LG_INITIAL_CARD_COUNT = 16;
 const MD_INITIAL_CARD_COUNT = 8;
 const SM_INITIAL_CARD_COUNT = 5;
 
-export default function MoviesCardList({ moviesToRender, saveMovie, savedMovies, deleteMovie, isLoading }) {
+export default function MoviesCardList({ moviesToRender, saveMovie, savedMovies, deleteMovie, isLoading, notFound }) {
 
   const { pathname } = useLocation();
   const whatMoviesShowing = pathname === '/movies' ? moviesToRender : savedMovies;
@@ -65,7 +65,7 @@ export default function MoviesCardList({ moviesToRender, saveMovie, savedMovies,
       {isLoading
         ? <Preloader />
         : <>
-          {whatMoviesShowing.length === 0 && <p className='movies__list-error'>Ничего не найдено</p>}
+          {whatMoviesShowing.length === 0 && notFound && <p className='movies__list-error'>Ничего не найдено</p>}
           <ul className='movies__list'>
             {pathname === '/movies'
               ?

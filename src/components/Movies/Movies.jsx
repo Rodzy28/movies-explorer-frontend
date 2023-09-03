@@ -12,12 +12,14 @@ export default function Movies({ saveMovie, savedMovies, deleteMovie }) {
   const [moviesBase, setMoviesBase] = useState([]);
   const [moviesToRender, setMoviesToRender] = useState([]);
   const [moviesToHistory, setMoviesToHistory] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   function searchMovies(value) {
     setIsLoading(true);
     setMoviesToHistory(true);
     setSearchValue(value);
     localStorage.setItem('search', JSON.stringify(value));
+    setNotFound(true);
 
     if (localStorage.getItem('moviesBase')) {
       setMoviesBase(JSON.parse(localStorage.getItem('moviesBase')));
@@ -76,6 +78,7 @@ export default function Movies({ saveMovie, savedMovies, deleteMovie }) {
         savedMovies={savedMovies}
         deleteMovie={deleteMovie}
         isLoading={isLoading}
+        notFound={notFound}
       />
     </main>
   )
