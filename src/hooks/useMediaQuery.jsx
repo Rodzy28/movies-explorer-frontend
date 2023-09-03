@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function useMediaQuery(query) {
   const getMatches = (query) => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       return window.matchMedia(query).matches;
     }
     return false;
@@ -20,16 +20,16 @@ export function useMediaQuery(query) {
     handleChange();
 
     if (matchMedia.addEventListener) {
-      matchMedia.addEventListener("change", handleChange);
+      matchMedia.addEventListener('change', handleChange);
     } else {
-      matchMedia.addEventListener("change", handleChange);
+      matchMedia.addEventListener('change', handleChange);
     }
 
     return () => {
       if (matchMedia.removeEventListener) {
-        matchMedia.removeEventListener("change", handleChange);
+        matchMedia.removeEventListener('change', handleChange);
       } else {
-        matchMedia.removeEventListener("change", handleChange);
+        matchMedia.removeEventListener('change', handleChange);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,25 +1,26 @@
 import './SearchForm.css';
 import Switch from '../Switch/Switch';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
+export default function SearchForm({ searchMovies, shortMovies, setShortMovies, searchValue }) {
 
   const { values, handleChange, isValid, setValues } = useFormAndValidation();
+  const { pathname } = useLocation();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!isValid) {
       console.log('Нужно ввести ключевое слово.');
     } else {
-      checkLocalMovies(values.search);
-      localStorage.setItem('search', values.search);
+      searchMovies(values.search);
     }
   }
 
   useEffect(() => {
-    if (localStorage.getItem('search')) {
-      setValues({ ...values, 'search': localStorage.getItem('search') });
+    if (pathname === '/movies') {
+      setValues({ search: searchValue })
     }
   }, [])
 
@@ -31,14 +32,14 @@ export default function SearchForm({ checkLocalMovies, checked, setChecked }) {
         <label className='search__label'>
           <input className='search__input' type='text' name='search'
             placeholder='Фильм' minLength='1' maxLength='30' autoComplete='off'
-            value={values.search || ''}
+            value={values?.search || ''}
             onChange={handleChange} required />
           <button className='search__button' type='submit' form='search-form'>Найти</button>
         </label>
       </form>
       <Switch
-        checked={checked}
-        setChecked={setChecked}
+        shortMovies={shortMovies}
+        setShortMovies={setShortMovies}
       />
     </section>
   )

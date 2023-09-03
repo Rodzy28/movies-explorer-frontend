@@ -2,7 +2,9 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useState } from 'react';
+import {
+  // useEffect,
+  useState } from 'react';
 // import Preloader from '../Preloader/Preloader';
 
 const LG_ROW_CARD_COUNT = 3;
@@ -13,14 +15,14 @@ const LG_INITIAL_CARD_COUNT = 12;
 const MD_INITIAL_CARD_COUNT = 8;
 const SM_INITIAL_CARD_COUNT = 5;
 
-export default function MoviesCardList({ foundMovies, saveMovie, savedMovies, deleteMovie }) {
+export default function MoviesCardList({moviesToRender, saveMovie, savedMovies, deleteMovie }) {
 
   const { pathname } = useLocation();
 
-  const whatMoviesShowing = pathname === '/movies' ? foundMovies : savedMovies;
+  const whatMoviesShowing = pathname === '/movies' ? moviesToRender : savedMovies;
 
-  const isDesktop = useMediaQuery("(min-width: 1280px)");
-  const isTablet = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery('(min-width: 1280px)');
+  const isTablet = useMediaQuery('(min-width: 768px)');
 
   const cardColumnCount = isDesktop
     ? LG_ROW_CARD_COUNT
@@ -72,9 +74,11 @@ export default function MoviesCardList({ foundMovies, saveMovie, savedMovies, de
         ))}
         {/* <Preloader /> */}
       </ul>
-      <button onClick={handleClick} className='movies__button-more' type='button'>
+      {pathname === '/movies'
+      ? <button onClick={handleClick} className='movies__button-more' type='button'>
         Ещё
       </button>
+      : ''}
     </section>
   )
 }
