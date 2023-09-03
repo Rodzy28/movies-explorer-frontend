@@ -50,7 +50,7 @@ export default function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          navigate("/movies", { replace: true });
+          navigate('/movies', { replace: true });
         }
       })
       .catch((err) => {
@@ -127,44 +127,26 @@ export default function App() {
 
   const [foundMovies, setFoundMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [checked, setChecked] = useState(false);
-  let moviesBase = JSON.parse(localStorage.getItem('moviesBase'));
+  // let moviesBase = JSON.parse(localStorage.getItem('moviesBase'));
 
-  function getApiMovies(moviesName) {
-    moviesApi.getMovies()
-      .then((movies) => {
-        localStorage.setItem('moviesBase', JSON.stringify(movies));
-        searchLocalStorage(moviesName);
-      })
-      .catch((err) => console.log(err));
-  }
+  // function checkLocalMovies(moviesName) {
+  //   if (moviesBase === null) {
+  //     getApiMovies(moviesName);
+  //   } else {
+  //     searchLocalStorage(moviesName);
+  //   }
+  // }
 
-  function checkLocalMovies(moviesName) {
-    if (moviesBase === null) {
-      getApiMovies(moviesName);
-    } else {
-      searchLocalStorage(moviesName);
-    }
-  }
+  // function searchLocalStorage(moviesName) {
+  //   setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
+  //     .filter(
+  //       item => (item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
+  //         || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
+  //         && (item.duration < 40)
+  //     ));
+  // }
 
-  function searchLocalStorage(moviesName) {
-    if (checked) {
-      setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
-        .filter(
-          item => (item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
-            || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
-            && (item.duration < 40)
-        ));
-    } else {
-      setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
-        .filter(
-          item => item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
-            || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
-      );
-    }
-  }
-
-   function handleSaveMovie(movieCard) {
+  function handleSaveMovie(movieCard) {
     mainApi.addMovie(movieCard)
       .then((addMovieCard) => {
         setSavedMovies([...savedMovies, addMovieCard]);
@@ -207,15 +189,12 @@ export default function App() {
           <Route path='/movies'
             element={
               <ProtectedRoute
-                checkLocalMovies={checkLocalMovies}
                 element={Movies}
                 loggedIn={loggedIn}
                 foundMovies={foundMovies}
                 saveMovie={handleSaveMovie}
                 savedMovies={savedMovies}
                 deleteMovie={handleDeleteMovie}
-                checked={checked}
-                setChecked={setChecked}
               />
             }
           />
@@ -227,13 +206,11 @@ export default function App() {
                 loggedIn={loggedIn}
                 savedMovies={savedMovies}
                 deleteMovie={handleDeleteMovie}
-                checked={checked}
-                setChecked={setChecked}
               />
             }
           />
 
-          <Route path='*' element={loggedIn ? <Navigate to="/movies" /> : <NotFound />} />
+          <Route path='*' element={loggedIn ? <Navigate to='/movies' /> : <NotFound />} />
         </Routes>
         {routeWithFooter.includes(pathname) ? <Footer /> : ''}
       </div>

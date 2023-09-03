@@ -19,17 +19,17 @@ export default function Header({ loggedIn }) {
         setWidth(window.innerWidth);
       }
 
-      window.addEventListener("resize", handleResize);
+      window.addEventListener('resize', handleResize);
 
       return () => {
-        window.removeEventListener("resize", handleResize);
+        window.removeEventListener('resize', handleResize);
       }
     }, [setWidth])
 
     return width < 769;
   });
 
-  let windowSize= WindowWidth();
+  let windowSize = WindowWidth();
 
   return (
     <header className={`header ${pathname === '/' ? 'header_dark' : ''}`}>

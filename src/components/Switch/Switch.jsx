@@ -1,20 +1,14 @@
-import { useEffect } from 'react';
 import './Switch.css';
 
-export default function Switch({checked, setChecked}) {
+export default function Switch({shortMovies, setShortMovies}) {
 
-  function handleCheckbox() {
-    setChecked(!checked);
-    localStorage.setItem('Checked', !checked);
+  function handleCheckbox(e) {
+    setShortMovies(e.target.checked);
   }
-
-  useEffect(() => {
-    setChecked(JSON.parse(localStorage.getItem('Checked')));
-  }, [setChecked])
 
   return (
     <div className='switch'>
-      <input className='switch__checkbox' id='switch' type='checkbox' name='switch' onChange={handleCheckbox} checked={checked || ''} />
+      <input className='switch__checkbox' id='switch' type='checkbox' name='switch' onChange={handleCheckbox} checked={shortMovies || ''} />
       <label className='switch__background' htmlFor='switch'>
         <span className='switch__toggle' />
       </label>

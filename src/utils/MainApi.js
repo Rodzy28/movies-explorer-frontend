@@ -83,7 +83,7 @@ class MainApi {
 
   deleteMovie(movieId) {
     return this._request(`${this._url}/movies/${movieId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       credentials: 'include',
       headers: this._headers,
     });

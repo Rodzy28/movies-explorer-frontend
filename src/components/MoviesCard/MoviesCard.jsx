@@ -51,10 +51,10 @@ export default function MoviesCard({ movie, saveMovie, savedMovies, deleteMovie 
   }, [movie.id, savedMovies])
 
   return (
-    <li className="card">
-      <Link className='card__link' to={movie.trailerLink} target='_blank'>
+    <li className='card'>
+      <a className='card__link' href={movie.trailerLink} target='_blank' rel='noreferrer'>
         <img className='card__image' src={pathname === '/movies' ? `${baseUrl}${movie.image.url}` : movie.image} alt={`Постер фильма ${movie.nameRU}`} />
-      </Link>
+      </a>
       <div className='card__about'>
         <h2 className='card__title'>{movie.nameRU}</h2>
         <button className={pathname === '/movies' ? `card__save ${isSaved && 'card__save_active'}` : 'card__save card__dislike'}
