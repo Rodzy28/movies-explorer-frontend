@@ -6,6 +6,7 @@ export default function SavedMovies({ savedMovies, deleteMovie }) {
 
   const [shortMovies, setShortMovies] = useState('');
   const [moviesToRender, setMoviesToRender] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
@@ -18,11 +19,12 @@ export default function SavedMovies({ savedMovies, deleteMovie }) {
     });
 
     setMoviesToRender(filteredByName);
-
+    setIsLoading(false);
   }, [shortMovies, savedMovies, searchValue])
 
   function searchMovies(value) {
     setSearchValue(value);
+    setIsLoading(true);
   }
 
   return (
@@ -36,6 +38,7 @@ export default function SavedMovies({ savedMovies, deleteMovie }) {
       <MoviesCardList
         savedMovies={moviesToRender}
         deleteMovie={deleteMovie}
+        isLoading={isLoading}
       />
     </main>
   )

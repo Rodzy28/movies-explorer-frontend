@@ -8,12 +8,13 @@ export default function Movies({ saveMovie, savedMovies, deleteMovie }) {
 
   const [shortMovies, setShortMovies] = useState(JSON.parse(localStorage.getItem('checkbox')));
   const [searchValue, setSearchValue] = useState(JSON.parse(localStorage.getItem('search')));
+  const [isLoading, setIsLoading] = useState(false);
   const [moviesBase, setMoviesBase] = useState([]);
   const [moviesToRender, setMoviesToRender] = useState([]);
   const [moviesToHistory, setMoviesToHistory] = useState(false);
 
   function searchMovies(value) {
-
+    setIsLoading(true);
     setMoviesToHistory(true);
     setSearchValue(value);
     localStorage.setItem('search', JSON.stringify(value));
@@ -26,7 +27,10 @@ export default function Movies({ saveMovie, savedMovies, deleteMovie }) {
           localStorage.setItem('moviesBase', JSON.stringify(movies));
           setMoviesBase(movies);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setIsLoading(false);
+        })
     }
   }
 
@@ -52,10 +56,10 @@ export default function Movies({ saveMovie, savedMovies, deleteMovie }) {
 
     if (moviesToHistory) {
       localStorage.setItem('moviesHistory', JSON.stringify(filteredByName));
-    }
+      setIsLoading(false);
+      }
 
     setMoviesToRender(filteredByName);
-
   }, [moviesBase, shortMovies, searchValue, moviesToHistory])
 
   return (
@@ -71,6 +75,7 @@ export default function Movies({ saveMovie, savedMovies, deleteMovie }) {
         saveMovie={saveMovie}
         savedMovies={savedMovies}
         deleteMovie={deleteMovie}
+        isLoading={isLoading}
       />
     </main>
   )

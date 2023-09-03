@@ -13,7 +13,6 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import moviesApi from '../../utils/MoviesApi';
 
 export default function App() {
 
@@ -25,6 +24,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [savedMovies, setSavedMovies] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
 
   function handleRegister(data) {
@@ -123,29 +123,6 @@ export default function App() {
     }
   }, [loggedIn, pathname, navigate])
 
-  /////////////////////////////////////////////////////
-
-  const [foundMovies, setFoundMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
-  // let moviesBase = JSON.parse(localStorage.getItem('moviesBase'));
-
-  // function checkLocalMovies(moviesName) {
-  //   if (moviesBase === null) {
-  //     getApiMovies(moviesName);
-  //   } else {
-  //     searchLocalStorage(moviesName);
-  //   }
-  // }
-
-  // function searchLocalStorage(moviesName) {
-  //   setFoundMovies(JSON.parse(localStorage.getItem('moviesBase'))
-  //     .filter(
-  //       item => (item.nameRU.toLowerCase().includes(moviesName.toLowerCase())
-  //         || item.nameEN.toLowerCase().includes(moviesName.toLowerCase()))
-  //         && (item.duration < 40)
-  //     ));
-  // }
-
   function handleSaveMovie(movieCard) {
     mainApi.addMovie(movieCard)
       .then((addMovieCard) => {
@@ -162,8 +139,6 @@ export default function App() {
       })
       .catch((err) => console.log(err));
   }
-
-  ////////////////////////////////////////////
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -191,7 +166,6 @@ export default function App() {
               <ProtectedRoute
                 element={Movies}
                 loggedIn={loggedIn}
-                foundMovies={foundMovies}
                 saveMovie={handleSaveMovie}
                 savedMovies={savedMovies}
                 deleteMovie={handleDeleteMovie}
