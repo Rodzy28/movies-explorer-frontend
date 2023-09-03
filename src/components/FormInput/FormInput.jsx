@@ -32,7 +32,7 @@ export default function FormInput({ handleRegister, handleLogin, setDisabled, er
         <>
           <label className='form__label form__label-title'>Имя
             <input className='form__input' type='text' name='name'
-              placeholder='Введите имя' minLength='3' maxLength='30' autoComplete='off' pattern='[a-zа-я\- ]{3,30}' value={values.name || ''} onChange={handleChange} required />
+              placeholder='Введите имя' minLength='3' maxLength='30' autoComplete='off' pattern='[a-zA-Zа-яА-Я\- ]{3,30}' value={values.name || ''} onChange={handleChange} required />
           </label>
           <span className='form__input-error'>{errors.name}</span>
         </>
