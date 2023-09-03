@@ -92,7 +92,7 @@ export default function MoviesCardList({ moviesToRender, saveMovie, savedMovies,
             ))}
           </>
         }
-        {/* <Preloader /> */}
+        <Preloader />
       </ul>
       {pathname === '/movies' && whatMoviesShowing.length > roundedVisibleCardCount
         ? <button onClick={handleClick} className='movies__button-more' type='button'>
