@@ -1,0 +1,31 @@
+.blue-button {
+    width: 396px;
+    height: 45px;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background-color: #3456F3;
+    color: #FFF;
+    transition: opacity .3s;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.blue-button:hover {
+    opacity: .8;
+}
+
+.blue-button_disabled {
+    background: #F8F8F8;
+    color: #C2C2C2;
+}
+
+@media screen and (max-width: 500px) {
+    .blue-button {
+        width: 260px;
+        font-size: 12px;
+    }
+}
