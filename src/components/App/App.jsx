@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Header from '../Header/Header';
@@ -23,7 +23,7 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
 
@@ -51,6 +51,7 @@ export default function App() {
         if (res) {
           setLoggedIn(true);
           navigate('/movies', { replace: true });
+          setErrorMessage(null);
         }
       })
       .catch((err) => {
@@ -101,6 +102,7 @@ export default function App() {
         .then(([userData, userMovies]) => {
           setCurrentUser(userData);
           setSavedMovies(userMovies);
+          setLoggedIn(true);
         })
         .catch(console.error);
     }
@@ -109,8 +111,8 @@ export default function App() {
   useEffect(() => {
     mainApi.getUserInfo()
       .then((userData) => {
-        setCurrentUser(userData);
         setLoggedIn(true);
+        setCurrentUser(userData);
       })
       .catch(console.error);
   }, []);
@@ -184,7 +186,7 @@ export default function App() {
             }
           />
 
-          <Route path='*' element={loggedIn ? <Navigate to='/movies' /> : <NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         {routeWithFooter.includes(pathname) ? <Footer /> : ''}
       </div>

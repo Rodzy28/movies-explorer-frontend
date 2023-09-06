@@ -39,14 +39,17 @@ export default function Profile({ onUpdateUser, handleLogOut, errorMessage }) {
         <label className='profile-form__label'>
           <span className='profile-form__title'>Имя</span>
           <input className='profile-form__input' type='text' name='name'
-            placeholder='Введите имя' autoComplete='off' minLength='3' maxLength='30'
-            value={values.name || ''} onChange={handleChange} disabled={!showButton} required />
+            placeholder='Введите имя' autoComplete='off' pattern='[a-zA-Zа-яА-Я\- ]{3,30}'
+            minLength='3' maxLength='30' value={values.name || ''} onChange={handleChange}
+            disabled={!showButton} required
+          />
         </label>
         <label className='profile-form__label'>
           <span className='profile-form__title'>E-mail</span>
           <input className='profile-form__input' type='email' name='email'
-            placeholder='Введите e-mail' autoComplete='off'
-            value={values.email || ''} onChange={handleChange} disabled={!showButton} required />
+            placeholder='Введите e-mail' autoComplete='off' pattern='[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9\-]+.+\.[a-zA-Z]{2,4}'
+            value={values.email || ''} onChange={handleChange} disabled={!showButton} required
+          />
         </label>
         <span className='profile__error'>{errorMessage}</span>
       </form>

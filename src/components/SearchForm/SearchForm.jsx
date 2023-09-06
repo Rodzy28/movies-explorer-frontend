@@ -1,19 +1,21 @@
 import './SearchForm.css';
 import Switch from '../Switch/Switch';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function SearchForm({ searchMovies, shortMovies, setShortMovies, searchValue }) {
 
+  const [searchError, setSearchError] = useState(false);
   const { values, handleChange, isValid, setValues } = useFormAndValidation();
   const { pathname } = useLocation();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!isValid) {
-      console.log('Нужно ввести ключевое слово.');
+      setSearchError(true);
     } else {
+      setSearchError(false);
       searchMovies(values.search);
     }
   }
@@ -33,9 +35,11 @@ export default function SearchForm({ searchMovies, shortMovies, setShortMovies, 
           <input className='search__input' type='text' name='search'
             placeholder='Фильм' minLength='1' maxLength='30' autoComplete='off'
             value={values?.search || ''}
-            onChange={handleChange} required />
+            onChange={handleChange} required
+          />
           <button className='search__button' type='submit' form='search-form'>Найти</button>
         </label>
+          <span className={`search__input-error ${searchError ? 'search__input-error_enable' : ''}`}>Нужно ввести ключевое слово</span>
       </form>
       <Switch
         shortMovies={shortMovies}
