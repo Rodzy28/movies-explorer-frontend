@@ -1,0 +1,41 @@
+.navigation {
+  display: flex;
+}
+
+.navigation__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.navigation__item {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  transition: opacity .3s;
+}
+
+.navigation__item:hover {
+  opacity: .7;
+}
+
+.navigation__item:last-child {
+  font-weight: 400;
+}
+
+.navigation__link {
+  text-decoration: none;
+  color: #000;
+}
+
+.navigation__link_active {
+  border-bottom: 2px solid black;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.navigation__link_color_white {
+  color: #FFF;
+}

@@ -1,0 +1,164 @@
+.about-project {
+  padding: 111px 70px 100px;
+}
+
+.about-project__title {
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #000;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+}
+
+.table {
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  gap: 40px;
+}
+
+.table__cell {
+  display: flex;
+  flex-direction: column;
+  max-width: 550px;
+}
+
+.table__heading {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.table__text {
+  margin: 0;
+  padding-top: 26px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.table-line {
+  margin: 0;
+  padding: 0;
+  padding-top: 110px;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.table-line__cell {
+  width: 228px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.table-line__cell:last-child {
+  width: 912px;
+}
+
+.table-line__week {
+  margin: 0;
+  font-size: 14px;
+  line-height: normal;
+  padding: 9px 0;
+}
+
+.table-line__text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+.table-line__week_green {
+  background-color: #2BE080;
+}
+
+.table-line__week_gray {
+  background-color: #F2F2F2;
+}
+
+@media screen and (max-width: 900px) {
+  .about-project {
+    padding: 91px 50px 77px;
+  }
+
+  .table {
+    gap: 37px;
+  }
+
+  .table__text {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .table-line {
+    padding-top: 93px;
+  }
+
+  .table-line__cell {
+    min-width: 140px;
+  }
+
+  .table-line__cell:last-child {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project {
+    padding: 71px 18px 70px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+
+  .table {
+    padding-top: 61px;
+    flex-direction: column;
+    gap: 57px;
+  }
+
+  .table__cell {
+    gap: 17px;
+  }
+
+  .table__heading {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .table__text {
+    padding: 0;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .table-line {
+    padding-top: 60px;
+  }
+
+  .table-line__cell {
+    min-width: 100px;
+  }
+
+  .table-line__week {
+    font-size: 11px;
+    padding: 11px 0;
+  }
+
+  .table-line__text {
+    font-size: 11px;
+    margin-top: 7px;
+  }
+}
